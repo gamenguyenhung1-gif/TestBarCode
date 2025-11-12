@@ -5,6 +5,8 @@ using System.Text;
 using System.Windows.Forms;
 using ZXing;
 using NLog;
+using System.Text.Json;
+using System.IO;
 
 namespace TestBarCode2
 {
@@ -17,7 +19,7 @@ namespace TestBarCode2
         private Point startPoint;
         private bool isDrawing = false;
         private Rectangle currentRect;
-
+        private TreeNode selectedNode = null;
         public Form1()
         {
             InitializeComponent();
@@ -27,15 +29,32 @@ namespace TestBarCode2
             // 🔹 Thêm các loại barcode vào ComboBox
             cbxBarcodeFormat.Items.Add("Tự động (Auto)");
             cbxBarcodeFormat.Items.Add("CODE_128");
-            cbxBarcodeFormat.Items.Add("QR_CODE");
-            cbxBarcodeFormat.Items.Add("EAN_13");
             cbxBarcodeFormat.Items.Add("CODE_39");
-            cbxBarcodeFormat.Items.Add("PDF_417");
+            cbxBarcodeFormat.Items.Add("CODE_93");
+            cbxBarcodeFormat.Items.Add("EAN_8");
+            cbxBarcodeFormat.Items.Add("EAN_13");
+            cbxBarcodeFormat.Items.Add("UPC_A");
+            cbxBarcodeFormat.Items.Add("UPC_E");
+            cbxBarcodeFormat.Items.Add("ITF");
+            cbxBarcodeFormat.Items.Add("CODABAR");
+            cbxBarcodeFormat.Items.Add("QR_CODE");
             cbxBarcodeFormat.Items.Add("DATA_MATRIX");
+            cbxBarcodeFormat.Items.Add("PDF_417");
+            cbxBarcodeFormat.Items.Add("AZTEC");
+            cbxBarcodeFormat.Items.Add("MAXICODE");
+            cbxBarcodeFormat.Items.Add("MSI");
+            cbxBarcodeFormat.Items.Add("PLESSEY");
+
             cbxBarcodeFormat.SelectedIndex = 0;
+            cbxBarcodeFormat.SelectedIndexChanged += cbxBarcodeFormat_SelectedIndexChanged;
 
             lvRoi.CheckBoxes = true;
             lvRoi.AfterSelect += lvRoi_AfterSelect;
+
+            roiX.KeyDown += RoiTextbox_KeyDown;
+            roiY.KeyDown += RoiTextbox_KeyDown;
+            roiW.KeyDown += RoiTextbox_KeyDown;
+            roiH.KeyDown += RoiTextbox_KeyDown;
 
             // Gắn event
             picImage.MouseDown += picImage_MouseDown;
@@ -43,9 +62,8 @@ namespace TestBarCode2
             picImage.MouseUp += picImage_MouseUp;
             picImage.Paint += picImage_Paint;
 
-            btnLoadImage.Click += btnLoadImage_Click;
             btnDeleteROI.Click += btnDeleteROI_Click;
-            btnReadBarcode.Click += btnReadBarcode_Click;
+            
         }
 
         // 🔹 Nút Load ảnh
@@ -102,13 +120,39 @@ namespace TestBarCode2
         {
             if (e.Node.Parent != null) // Bỏ qua node gốc "Mode"
             {
-                selectedRoiIndex = e.Node.Index;  // Ghi lại ROI đang được chọn
-                picImage.Invalidate();             // Vẽ lại ảnh để đổi màu ROI
+                selectedRoiIndex = e.Node.Index;
+                selectedNode = e.Node;
+
+                // Nếu node này đã có thuật toán thì hiển thị lại trên ComboBox
+                if (selectedNode.Tag != null)
+                {
+                    string algo = selectedNode.Tag.ToString();
+                    int index = cbxBarcodeFormat.Items.IndexOf(algo);
+                    if (index >= 0)
+                        cbxBarcodeFormat.SelectedIndex = index;
+                    else
+                        cbxBarcodeFormat.SelectedIndex = 0; // Mặc định "Tự động (Auto)"
+                }
+
+                picImage.Invalidate();
             }
             else
             {
-                selectedRoiIndex = -1; // Không chọn ROI nào
+                selectedNode = null;
+                selectedRoiIndex = -1;
                 picImage.Invalidate();
+            }
+            if (selectedRoiIndex >= 0 && selectedRoiIndex < roiList.Count)
+            {
+                Rectangle roi = roiList[selectedRoiIndex];
+                roiX.Text = roi.X.ToString();
+                roiY.Text = roi.Y.ToString();
+                roiW.Text = roi.Width.ToString();
+                roiH.Text = roi.Height.ToString();
+            }
+            else
+            {
+                roiX.Text = roiY.Text = roiW.Text = roiH.Text = "";
             }
         }
         // 🔹 Mouse event
@@ -178,6 +222,125 @@ namespace TestBarCode2
                 }
             }
         }
+        private void SaveToJson(string filePath)
+        {
+            RootModel data = new RootModel();
+
+            for (int i = 0; i < roiList.Count; i++)
+            {
+                var rect = roiList[i];
+                bool enabled = false;
+                string algo = "default";
+
+                if (lvRoi.Nodes.Count > 0 && lvRoi.Nodes[0].Nodes.Count > i)
+                {
+                    var node = lvRoi.Nodes[0].Nodes[i];
+                    enabled = node.Checked;
+                    if (node.Tag != null)
+                        algo = node.Tag.ToString();
+                }
+
+                data.Model.Roi.Add(new Roi
+                {
+                    Id = i + 1,
+                    X = rect.X,
+                    Y = rect.Y,
+                    W = rect.Width,
+                    H = rect.Height,
+                    Enable = enabled,
+                    Thuat_toan = algo
+                });
+            }
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(data, options);
+            File.WriteAllText(filePath, json);
+
+            MessageBox.Show("✅ Đã lưu file JSON!");
+        }
+
+        private void LoadFromJson(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("Không tìm thấy file JSON!");
+                return;
+            }
+
+            string json = File.ReadAllText(filePath);
+            var data = JsonSerializer.Deserialize<RootModel>(json);
+
+            roiList.Clear();
+            lvRoi.Nodes.Clear();
+            TreeNode root = new TreeNode("Mode");
+            lvRoi.Nodes.Add(root);
+
+            foreach (var roi in data.Model.Roi)
+            {
+                roiList.Add(new Rectangle(roi.X, roi.Y, roi.W, roi.H));
+
+                TreeNode node = new TreeNode($"ROI{roi.Id}")
+                {
+                    Checked = roi.Enable,
+                    Tag = roi.Thuat_toan ?? "default"
+                };
+                lvRoi.Nodes[0].Nodes.Add(node);
+            }
+
+            lvRoi.Nodes[0].Expand();
+            picImage.Invalidate();
+        }
+        private void cbxBarcodeFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (selectedNode != null)
+            {
+                string algo = cbxBarcodeFormat.SelectedItem.ToString();
+                selectedNode.Tag = algo; // 🔹 Gán thuật toán vào ROI đang chọn
+            }
+        }
+        private void RoiTextbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (selectedRoiIndex < 0 || selectedRoiIndex >= roiList.Count)
+                return;
+
+            TextBox tb = sender as TextBox;
+            if (tb == null) return;
+
+            // Lấy ROI hiện tại
+            Rectangle roi = roiList[selectedRoiIndex];
+
+            int delta = 0;
+            if (e.KeyCode == Keys.Up) delta = 1;
+            else if (e.KeyCode == Keys.Down) delta = -1;
+
+            if (delta == 0) return;
+
+            // Xác định textbox nào được chỉnh
+            if (tb == roiX)
+                roi.X += delta;
+            else if (tb == roiY)
+                roi.Y += delta;
+            else if (tb == roiW)
+                roi.Width = Math.Max(1, roi.Width + delta);
+            else if (tb == roiH)
+                roi.Height = Math.Max(1, roi.Height + delta);
+
+            // Cập nhật lại ROI trong danh sách
+            roiList[selectedRoiIndex] = roi;
+
+            // Cập nhật text hiển thị
+            roiX.Text = roi.X.ToString();
+            roiY.Text = roi.Y.ToString();
+            roiW.Text = roi.Width.ToString();
+            roiH.Text = roi.Height.ToString();
+
+            // Vẽ lại hình
+            picImage.Invalidate();
+
+            // Ngăn chặn tiếng "bíp" khi nhấn phím
+            e.SuppressKeyPress = true;
+        }
+
 
         // 🔹 Đọc barcode
         private void btnReadBarcode_Click(object sender, EventArgs e)
@@ -272,6 +435,16 @@ namespace TestBarCode2
             // 🔹 Sau khi quét hết ROIs — hiển thị toàn bộ kết quả cùng lúc
             MessageBox.Show(results.ToString(), "Kết quả đọc barcode", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+        }
+
+        private void btnSaveJson_Click(object sender, EventArgs e)
+        {
+            SaveToJson("config.json");
+        }
+
+        private void btnLoadJson_Click(object sender, EventArgs e)
+        {
+            LoadFromJson("config.json");
         }
     }
 }

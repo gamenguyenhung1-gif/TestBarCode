@@ -1,0 +1,51 @@
+{
+  "Model": {
+    "Roi": [
+      {
+        "Id": 1,
+        "X": 4,
+        "Y": 15,
+        "W": 116,
+        "H": 52,
+        "Enable": true,
+        "Thuat_toan": "CODE_39"
+      },
+      {
+        "Id": 2,
+        "X": 127,
+        "Y": 10,
+        "W": 116,
+        "H": 58,
+        "Enable": true,
+        "Thuat_toan": "CODE_128"
+      },
+      {
+        "Id": 3,
+        "X": 247,
+        "Y": 14,
+        "W": 120,
+        "H": 51,
+        "Enable": true,
+        "Thuat_toan": "CODE_93"
+      },
+      {
+        "Id": 4,
+        "X": 228,
+        "Y": 70,
+        "W": 107,
+        "H": 48,
+        "Enable": true,
+        "Thuat_toan": "EAN_13"
+      },
+      {
+        "Id": 5,
+        "X": 299,
+        "Y": 127,
+        "W": 94,
+        "H": 52,
+        "Enable": true,
+        "Thuat_toan": "EAN_8"
+      }
+    ]
+  }
+}

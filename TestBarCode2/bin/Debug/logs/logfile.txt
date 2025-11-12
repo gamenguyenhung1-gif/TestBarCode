@@ -1,12 +1,73 @@
-2025-11-05 14:24:39.2445 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
-2025-11-05 14:29:52.7128 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
-2025-11-05 14:30:11.5251 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
-2025-11-05 14:30:11.5251 | WARN | TestBarCode2.Form1 | ❌ ROI2: Không đọc được mã. 
-2025-11-05 14:30:11.5251 | WARN | TestBarCode2.Form1 | ❌ ROI3: Không đọc được mã. 
-2025-11-05 14:30:11.5386 | INFO | TestBarCode2.Form1 | ✅ ROI4: [CODE_39] Aa-1234 
-2025-11-05 14:30:11.5386 | INFO | TestBarCode2.Form1 | ✅ ROI5: [CODABAR] 012345 
-2025-11-05 14:30:19.2054 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
-2025-11-05 14:30:19.2127 | WARN | TestBarCode2.Form1 | ❌ ROI2: Không đọc được mã. 
-2025-11-05 14:30:19.2127 | WARN | TestBarCode2.Form1 | ❌ ROI3: Không đọc được mã. 
-2025-11-05 14:30:19.2127 | INFO | TestBarCode2.Form1 | ✅ ROI4: [CODE_39] Aa-1234 
-2025-11-05 14:30:19.2127 | INFO | TestBarCode2.Form1 | ✅ ROI5: [CODABAR] 012345 
+
+2025-11-12 10:18:37.7023 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
+2025-11-12 10:18:47.7025 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:18:47.7025 | INFO | TestBarCode2.Form1 | ✅ ROI2: [EAN_13] 1234567890128 
+2025-11-12 10:18:54.7118 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:18:54.7118 | INFO | TestBarCode2.Form1 | ✅ ROI2: [EAN_13] 1234567890128 
+2025-11-12 10:20:17.6860 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
+2025-11-12 10:20:32.4280 | INFO | TestBarCode2.Form1 | ✅ ROI1: [CODE_128] CODE128 
+2025-11-12 10:21:07.4683 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
+2025-11-12 10:21:59.8762 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:21:59.8762 | WARN | TestBarCode2.Form1 | ❌ ROI2: Không đọc được mã. 
+2025-11-12 10:21:59.8762 | WARN | TestBarCode2.Form1 | ❌ ROI3: Không đọc được mã. 
+2025-11-12 10:21:59.8762 | INFO | TestBarCode2.Form1 | ✅ ROI4: [CODE_128] CODE128 
+2025-11-12 10:22:27.4116 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:22:33.5582 | INFO | TestBarCode2.Form1 | ✅ ROI1: [EAN_8] 01234565 
+2025-11-12 10:22:37.9165 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:22:43.6362 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:22:47.2446 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:22:51.0494 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:22:54.2269 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:22:57.6996 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:23:02.0969 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:23:06.8831 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:23:10.2980 | INFO | TestBarCode2.Form1 | ✅ ROI1: [EAN_8] 01234565 
+2025-11-12 10:23:21.6526 | INFO | TestBarCode2.Form1 | ✅ ROI2: [EAN_13] 1234567890128 
+2025-11-12 10:23:25.2969 | INFO | TestBarCode2.Form1 | ✅ ROI2: [EAN_13] 1234567890128 
+2025-11-12 10:23:31.8334 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:23:31.8334 | INFO | TestBarCode2.Form1 | ✅ ROI2: [EAN_13] 1234567890128 
+2025-11-12 10:23:31.8334 | WARN | TestBarCode2.Form1 | ❌ ROI3: Không đọc được mã. 
+2025-11-12 10:23:43.5212 | INFO | TestBarCode2.Form1 | ✅ ROI1: [EAN_8] 01234565 
+2025-11-12 10:23:43.5212 | INFO | TestBarCode2.Form1 | ✅ ROI2: [EAN_13] 1234567890128 
+2025-11-12 10:23:43.5212 | INFO | TestBarCode2.Form1 | ✅ ROI3: [CODE_39] ABC-1234 
+2025-11-12 10:23:46.5780 | INFO | TestBarCode2.Form1 | ✅ ROI1: [EAN_8] 01234565 
+2025-11-12 10:23:46.5780 | INFO | TestBarCode2.Form1 | ✅ ROI2: [EAN_13] 1234567890128 
+2025-11-12 10:23:46.5780 | INFO | TestBarCode2.Form1 | ✅ ROI3: [CODE_39] ABC-1234 
+2025-11-12 10:24:14.4265 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:24:19.6905 | INFO | TestBarCode2.Form1 | ✅ ROI1: [EAN_8] 01234565 
+2025-11-12 10:24:39.4666 | INFO | TestBarCode2.Form1 | ✅ ROI3: [CODE_39] ABC-1234 
+2025-11-12 10:24:54.0037 | WARN | TestBarCode2.Form1 | ❌ ROI3: Không đọc được mã. 
+2025-11-12 10:24:57.4984 | WARN | TestBarCode2.Form1 | ❌ ROI3: Không đọc được mã. 
+2025-11-12 10:25:00.9063 | WARN | TestBarCode2.Form1 | ❌ ROI3: Không đọc được mã. 
+2025-11-12 10:25:06.1124 | INFO | TestBarCode2.Form1 | ✅ ROI3: [CODE_39] ABC-1234 
+2025-11-12 10:25:19.1934 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:25:23.8011 | INFO | TestBarCode2.Form1 | ✅ ROI1: [EAN_8] 01234565 
+2025-11-12 10:25:28.2731 | WARN | TestBarCode2.Form1 | ❌ ROI1: Không đọc được mã. 
+2025-11-12 10:26:57.7270 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
+2025-11-12 10:27:22.6244 | INFO | TestBarCode2.Form1 | ✅ ROI1: [CODE_39] ABC-1234 
+2025-11-12 10:27:22.6244 | INFO | TestBarCode2.Form1 | ✅ ROI2: [CODE_128] CODE128 
+2025-11-12 10:27:22.6244 | INFO | TestBarCode2.Form1 | ✅ ROI3: [CODE_93] CODE93 
+2025-11-12 10:27:22.6244 | INFO | TestBarCode2.Form1 | ✅ ROI4: [CODABAR] 012345 
+2025-11-12 10:27:22.6374 | INFO | TestBarCode2.Form1 | ✅ ROI5: [ITF] 00123456 
+2025-11-12 10:27:22.6374 | INFO | TestBarCode2.Form1 | ✅ ROI6: [EAN_13] 1234567890128 
+2025-11-12 10:28:51.3735 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
+2025-11-12 10:29:08.7291 | INFO | TestBarCode2.Form1 | ✅ ROI1: [CODE_39] ABC-1234 
+2025-11-12 10:29:08.7381 | INFO | TestBarCode2.Form1 | ✅ ROI2: [CODE_128] CODE128 
+2025-11-12 10:29:08.7610 | WARN | TestBarCode2.Form1 | ❌ ROI3: Không đọc được mã. 
+2025-11-12 10:29:08.7620 | INFO | TestBarCode2.Form1 | ✅ ROI4: [CODABAR] 012345 
+2025-11-12 10:29:08.7620 | INFO | TestBarCode2.Form1 | ✅ ROI5: [ITF] 00123456 
+2025-11-12 10:29:08.7620 | WARN | TestBarCode2.Form1 | ❌ ROI6: Không đọc được mã. 
+2025-11-12 10:32:36.7500 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
+2025-11-12 10:36:28.8715 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
+2025-11-12 10:36:42.8272 | INFO | TestBarCode2.Form1 | ✅ ROI1: [CODE_39] ABC-1234 
+2025-11-12 10:36:42.8272 | INFO | TestBarCode2.Form1 | ✅ ROI2: [CODE_128] CODE128 
+2025-11-12 10:36:42.8272 | INFO | TestBarCode2.Form1 | ✅ ROI3: [CODE_93] CODE93 
+2025-11-12 10:36:42.8272 | INFO | TestBarCode2.Form1 | ✅ ROI4: [CODABAR] 012345 
+2025-11-12 10:36:42.8411 | INFO | TestBarCode2.Form1 | ✅ ROI5: [ITF] 00123456 
+2025-11-12 10:36:42.8411 | INFO | TestBarCode2.Form1 | ✅ ROI6: [EAN_13] 1234567890128 
+2025-11-12 10:37:26.3827 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
+2025-11-12 10:39:34.9059 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
+2025-11-12 10:40:05.4113 | INFO | TestBarCode2.Form1 | ✅ ROI7: [EAN_8] 01234565 
+2025-11-12 10:42:23.7545 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
+2025-11-12 10:43:43.7994 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 
+2025-11-12 10:50:18.9620 | INFO | TestBarCode2.Program | Ứng dụng khởi động. 

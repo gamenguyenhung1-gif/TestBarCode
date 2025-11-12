@@ -1,24 +1,24 @@
-﻿{
-  "NLog": {
-    "autoReload": true,
-    "throwConfigExceptions": true,
-    "targets": {
-      "logfile": {
-        "type": "File",
-        "fileName": "logs/logfile.txt",
-        "layout": "${longdate} | ${level:uppercase=true} | ${logger} | ${message} ${exception:format=tostring}"
+﻿  {
+    "NLog": {
+      "autoReload": true,
+      "throwConfigExceptions": true,
+      "targets": {
+        "logfile": {
+          "type": "File",
+          "fileName": "logs/logfile.txt",
+          "layout": "${longdate} | ${level:uppercase=true} | ${logger} | ${message} ${exception:format=tostring}"
+        },
+        "logconsole": {
+          "type": "Console",
+          "layout": "${time} ${level} ${message}"
+        }
       },
-      "logconsole": {
-        "type": "Console",
-        "layout": "${time} ${level} ${message}"
-      }
-    },
-    "rules": [
-      {
-        "logger": "*",
-        "minLevel": "Info",
-        "writeTo": "logfile"
-      }
-    ]
+      "rules": [
+        {
+          "logger": "*",
+          "minLevel": "Info",
+          "writeTo": "logfile"
+        }
+      ]
+    }
   }
-}
