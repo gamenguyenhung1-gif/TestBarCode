@@ -184,7 +184,7 @@ namespace TestBarCode2
                 lvRoi.Nodes.Add("Mode");
 
             TreeNode node = new TreeNode($"ROI{roiList.Count}");
-            node.Checked = true; // ✅ Mặc định được chọn để đọc
+            node.Checked = true; // ✅ Mặc định được chọn để đọcgggggggggg
             lvRoi.Nodes[0].Nodes.Add(node);
             lvRoi.Nodes[0].Expand();
 
